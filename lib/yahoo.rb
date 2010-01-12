@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rc_rest'
+require 'nokogiri'
 
 ##
 # Abstract class for implementing Yahoo APIs.
@@ -39,8 +40,8 @@ class Yahoo < RCRest
   end
 
   def check_error(xml) # :nodoc:
-    err = xml.elements['Error']
-    raise Error, err.elements['Message'].text if err
+    err = xml.at_xpath('Error')
+    raise Error, err.at_xpath('Message').content if err
   end
 
   def make_url(method, params) # :nodoc:

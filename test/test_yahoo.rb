@@ -32,7 +32,7 @@ class TestYahoo < Test::Unit::TestCase
   end
 
   def test_check_error
-    xml = REXML::Document.new '<Error><Message>you broked it</Message></Error>'
+    xml = Nokogiri::XML '<Error><Message>you broked it</Message></Error>'
     @t.check_error xml
 
   rescue Yahoo::Error => e
